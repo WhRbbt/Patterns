@@ -10,6 +10,8 @@ import Patterns.Creational.Factory.Method.TravelPackageType;
 import Patterns.Creational.Prototype.Apartment;
 import Patterns.Creational.Prototype.ApartmentPrototype;
 import Patterns.Creational.Singleton.TravelAgency;
+import Patterns.Structural.Adapter.Booking;
+import Patterns.Structural.Adapter.BookingAdapter;
 import Patterns.Structural.Adapter.*;
 import Patterns.Structural.Bridge.*;
 import Patterns.Structural.Composite.Service;
@@ -81,12 +83,11 @@ public class Main {
         System.out.println("----------Abstract factory end----------");
         System.out.println();
         System.out.println("----------Adapter begin----------");
-        FlightBooking flightB = new FlightBooking();
+        FlightBooking flightA = new FlightBooking();
         HotelBooking hotelB = new HotelBooking();
-        Booking flightBooking = new FlightBookingAdapter(flightB);
-        Booking hotelBooking = new HotelBookingAdapter(hotelB);
-        flightBooking.book("New York", "2024-04-15");
-        hotelBooking.book("Grand Hotel", "2");
+        Booking booking = new BookingAdapter(flightA, hotelB);
+        booking.book("New York", "2024-04-15");
+        booking.book("Grand Hotel", "2");
         System.out.println("----------Adapter end----------");
         System.out.println();
         System.out.println("----------Bridge begin----------");
@@ -140,6 +141,7 @@ public class Main {
         System.out.println("----------Proxy begin----------");
         BookingService bookingService = new BookingServiceProxy();
         bookingService.bookFlight("Paris");
+        bookingService.bookFlight("Mars");
         System.out.println("----------Proxy end----------");
         System.out.println();
     }
